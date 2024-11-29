@@ -1,29 +1,23 @@
-#include <vector>
-
 class Solution
 {
 public:
-
     bool canJump(std::vector<int>& nums)
     {
+        int size = nums.size();
+        std::vector<bool> path(size, false);
 
-        int n = nums.size();
-        std::vector<bool> dp(n, false); 
-        dp[0] = true; 
-
-        for (int i = 0; i < n; i++)
+        path[0] = true;
+        for(int i = 0;i < size;++i)
         {
-
-            if (dp[i]) 
+            if(path[i])
             {
-                int maxJump = std::min(n - 1, i + nums[i]); 
-                for (int j = i + 1; j <= maxJump; j++) dp[j] = true;
+                int maxJump = std::min(size - 1, i + nums[i]);
+                for(int j = i + 1;j <= maxJump;++j)
+                {
+                    path[j] = true;
+                }
             }
-
         }
-
-        return dp[n - 1]; 
-
+        return path[size - 1];
     }
-
 };
